@@ -9,7 +9,7 @@ const app = express()
 const port = process.env.PORT || 4000
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://roadmap-backend-akhis-projects.vercel.app'],
+  origin: ['http://localhost:5173', 'https://roadmap-app-n2na.vercel.app'],
   credentials: true
 }))
 app.use(express.json())
