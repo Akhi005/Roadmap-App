@@ -71,22 +71,10 @@ A collaborative roadmap platform where users can interact with predefined roadma
 
 ### Frontend Structure
 src/
-├── components/ # Reusable UI components
-├── context/ # Global state management
-├── utils/ # Helper functions
-└── pages/ # Page-level components
+![Capture](https://github.com/user-attachments/assets/7de34c59-b091-41bc-8b3b-3d93de9d00a1)
 
 ### Backend Structure
-backend/
-├── Api/
-│   ├── .vercel/
-│   ├── node_modules/
-│   ├── .env
-│   ├── .gitignore
-│   ├── index.js # All API routes here
-│   ├── package-lock.json
-│   ├── package.json
-│   └── vercel.json
+![Capture1](https://github.com/user-attachments/assets/6c37b9f0-913d-4b69-9270-f71cc122f39d)
 
 ### Coding Standards
 1. **Component Design:**
