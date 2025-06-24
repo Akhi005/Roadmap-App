@@ -70,7 +70,6 @@ A collaborative roadmap platform where users can interact with predefined roadma
 ## Code Structure & Conventions
 
 ### Frontend Structure
-src/
 ![Capture](https://github.com/user-attachments/assets/7de34c59-b091-41bc-8b3b-3d93de9d00a1)
 
 ### Backend Structure
