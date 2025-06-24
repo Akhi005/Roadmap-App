@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:4000'
+const API = 'https://roadmap-backend-akhis-projects.vercel.app'
 
 const api = axios.create({
   baseURL: API,

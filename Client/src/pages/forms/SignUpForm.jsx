@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
-import api from '../../utils/axios'
+import { useAuth } from '../../context/AuthContext'
 
 export default function SignUpForm() {
   const navigate = useNavigate()
@@ -14,19 +14,20 @@ export default function SignUpForm() {
   } = useForm()
   const [serverError, setServerError] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const { signup } = useAuth()
   const password = watch("password")
 
   const onSubmit = async (data) => {
     setIsSubmitting(true)
     setServerError("")
-
+    
     try {
       // eslint-disable-next-line no-unused-vars
       const { confirmpassword, ...signupData } = data
-      const res = await api.post(`/auth/signup`, signupData)
-      localStorage.setItem("username", res.data.username)
-      localStorage.setItem("useremail", res.data.email)
-      navigate('/roadmap')
+      const res = await signup(data.username, data.email, data.password)
+      if (res){
+        navigate('/roadmap')
+      }
     } catch (err) {
       const msg = err.response?.data?.message || "Signup failed. Please try again."
       setServerError(msg)

@@ -11,7 +11,7 @@ const PrivateRoute = ({ children }) => {
       </div>
     )
   }
-  if (!auth) {
+  if (!auth) {    
     return <Navigate to="/signin" replace />
   }
   return  children 
