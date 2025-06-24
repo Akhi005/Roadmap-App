@@ -9,14 +9,19 @@ export default function Home() {
         with product development ideas through upvotes, comments, and
         discussions. Designed for transparency and community-driven feedback.
       </p>
-      <div className="flex gap-24 w-full px-44">
-        <img
-          src="https://i.ibb.co/4wZWqKwN/road-map-removebg-preview.png"
-          className="w-full h-full flex-1"
-          alt="roadmap" />
-        <div >
-          <Outlet />
-        </div>
+      <div className="flex  w-full px-14">
+        <div className="flex flex-col lg:flex-row items-center lg:items-stretch justify-center w-full ">
+          <div className="w-full flex justify-center items-center">
+            <img
+              src="https://i.ibb.co/4wZWqKwN/road-map-removebg-preview.png"
+              className="w-full h-auto object-cover lg:max-h-screen rounded-xl"
+              alt="roadmap"
+            />
+          </div>
+          <div className="w-[800px] mr-12 flex items-center justify-center">
+            <Outlet />
+          </div>
+      </div>
       </div>
     </div>
   )
