@@ -14,8 +14,8 @@ export default function Home() {
         </p>
       </header>
 
-      <main className="flex flex-col lg:flex-row items-center justify-center lg:px-14 pb-10"> 
-        <div className="flex flex-col lg:flex-row items-center lg:items-stretch justify-center w-full max-w-7xl mx-auto">
+      <main className="flex flex-col lg:flex-row items-center justify-center"> 
+        <div className="flex flex-col lg:flex-row items-center lg:items-stretch justify-center w-full max-w-8xl mx-auto">
           <div className="w-full lg:w-1/2"> 
             <img
               src="https://i.ibb.co/4wZWqKwN/road-map-removebg-preview.png"
@@ -23,8 +23,7 @@ export default function Home() {
               alt="Roadmap" 
             />
           </div>
-
-          <div className="w-full lg:w-1/2 flex items-center justify-center p-4 lg:ml-12 lg:min-h-[500px]"> 
+          <div className="w-[500px] flex items-center justify-center lg:ml-12"> 
             <Outlet />
           </div>
         </div>

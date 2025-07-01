@@ -20,10 +20,7 @@ export default function SignUpForm() {
   const onSubmit = async (data) => {
     setIsSubmitting(true)
     setServerError("")
-    
     try {
-      // eslint-disable-next-line no-unused-vars
-      const { confirmpassword, ...signupData } = data
       const res = await signup(data.username, data.email, data.password)
       if (res){
         navigate('/roadmap')

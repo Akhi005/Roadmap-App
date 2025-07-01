@@ -67,8 +67,7 @@ export default function SignInForm() {
           disabled={isSubmitting}
           className={`w-full my-4 font-semibold p-3 rounded-2xl text-xl cursor-pointer transition-colors duration-200 ease-in-out text-white ${isSubmitting ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-700 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'
             }`}
-          type="submit"
-        >
+          type="submit">
           {isSubmitting ? 'Signing in...' : 'Sign In'}
         </button>
       </form>

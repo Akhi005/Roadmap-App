@@ -8,10 +8,21 @@ require('dotenv').config()
 const app = express()
 const port = process.env.PORT || 4000
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://roadmap-app-n2na.vercel.app'
+]
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://roadmap-app-n2na.vercel.app'],
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   credentials: true
 }))
+
 app.use(express.json())
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.tvkzth2.mongodb.net/?retryWrites=true&w=majority`
@@ -296,7 +307,9 @@ connectDB().then(() => {
       res.status(500).json({ message: "Error deleting comment", details: err.message }) 
     }
   })
-
+  app.get('/', (req, res) => {
+    res.send('Roadmap API is running!')
+  })
   app.listen(port, () => {
     console.log(`Server running on port ${port}`)
   })
