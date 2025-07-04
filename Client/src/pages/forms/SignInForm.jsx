@@ -34,7 +34,7 @@ export default function SignInForm() {
 
   return (
     <div className="w-full flex justify-center px-4 sm:px-0">
-      <div className="border border-gray-200 rounded-xl bg-gray-100 w-full max-w-md p-6 sm:p-10 my-12 sm:my-16 shadow-md">
+      <div className="rounded-xl bg-gray-200 w-full max-w-md p-6 sm:p-10 my-12 sm:my-16 shadow-md">
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-2">
           <h2 className="text-2xl sm:text-3xl text-center font-bold mb-6 sm:mb-8">Login</h2>
 
@@ -43,7 +43,7 @@ export default function SignInForm() {
           <div>
             <label className="text-lg">Email</label>
             <input
-              className="bg-white w-full p-3 mt-1 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-white w-full p-3 mt-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
               {...register("email", {
                 required: true,
                 pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -59,7 +59,7 @@ export default function SignInForm() {
             <label className="text-lg">Password</label>
             <input
               type="password"
-              className="bg-white w-full p-3 mt-1 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-white w-full p-3 mt-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
               {...register("password", { required: true, minLength: 6 })}
             />
             {errors.password && (

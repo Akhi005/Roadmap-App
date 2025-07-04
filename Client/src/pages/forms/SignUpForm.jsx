@@ -34,7 +34,7 @@ export default function SignUpForm() {
 
   return (
     <div className="w-full flex justify-center px-4 sm:px-0">
-      <div className="w-full max-w-md bg-gray-100 border border-gray-200 rounded-xl px-6 sm:px-10 py-8 sm:py-12 my-12 shadow-md">
+      <div className="w-full max-w-md bg-gray-200  rounded-xl px-6 sm:px-10 py-8 sm:py-12 my-12 shadow-md">
         <h2 className="text-2xl sm:text-3xl text-center font-bold mb-4 sm:mb-6">Sign Up</h2>
         {serverError && (
           <p className="text-red-600 text-center py-2">{serverError}</p>
@@ -44,7 +44,7 @@ export default function SignUpForm() {
           <div>
             <label className="text-lg">Username</label>
             <input
-              className="bg-white w-full p-3 mt-1 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-white w-full p-3 mt-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
               {...register("username", { required: true, minLength: 4 })}
             />
             {errors.username && (
@@ -59,7 +59,7 @@ export default function SignUpForm() {
             <label className="text-lg">Email</label>
             <input
               type="email"
-              className="bg-white w-full p-3 mt-1 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-white w-full p-3 mt-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
               {...register("email", {
                 required: true,
                 pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -77,7 +77,7 @@ export default function SignUpForm() {
             <label className="text-lg">Password</label>
             <input
               type="password"
-              className="bg-white w-full p-3 mt-1 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-white w-full p-3 mt-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
               {...register("password", { required: true, minLength: 6 })}
             />
             {errors.password && (
@@ -92,7 +92,7 @@ export default function SignUpForm() {
             <label className="text-lg">Confirm Password</label>
             <input
               type="password"
-              className="bg-white w-full p-3 mt-1 rounded-xl border focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="bg-white w-full p-3 mt-1 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
               {...register("confirmpassword", {
                 required: true,
                 validate: (value) =>
