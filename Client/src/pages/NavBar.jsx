@@ -25,7 +25,7 @@ export default function NavBar() {
   }
 
   return (
-    <nav className="bg-[#f5f0ff] px-4 py-4 shadow-md">
+    <nav className="bg-[#f5f0ff] px-4 py-4 shadow-md h-40">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center gap-4">
           <button className="text-3xl lg:hidden" onClick={handleDropDown}>
@@ -37,7 +37,7 @@ export default function NavBar() {
         </div>
 
         <div className="hidden lg:flex justify-center">
-          <Logo width={220} />
+          <Logo width={180}/>
         </div>
 
         <div className="hidden lg:flex items-center gap-4">
@@ -53,7 +53,7 @@ export default function NavBar() {
 
       {isOpen && (
         <div className="lg:hidden mt-4 flex flex-col items-start gap-4 px-4">
-          <Logo width={160} />
+          <Logo width={220} />
           <p className="text-sm">{auth?.username ?? username}</p>
           <button
             onClick={handleSignOut}
