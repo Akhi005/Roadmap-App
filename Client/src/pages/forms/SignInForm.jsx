@@ -85,7 +85,7 @@ export default function SignInForm() {
         <div className="flex justify-center items-center mt-6">
           <p className="text-base sm:text-lg">Don't have an account?</p>
           <Link to="/">
-            <span className="font-bold text-blue-700 text-lg sm:text-xl ml-2 hover:underline">Signup</span>
+            <span className="font-bold text-blue-700 text-lg sm:text-xl ml-2 cursor-pointer hover:underline">Signup</span>
           </Link>
         </div>
       </div>

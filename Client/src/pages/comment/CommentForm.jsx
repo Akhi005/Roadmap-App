@@ -40,7 +40,7 @@ export default function CommentForm({ initialContent = '', onSubmit, submitLabel
           <button
             type="button"
             onClick={onCancel}
-            className="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors duration-200"
+            className="px-4 py-2 text-gray-700 cursor-pointer bg-gray-200 rounded-md hover:bg-gray-300 transition-colors duration-200"
           >
             Cancel
           </button>

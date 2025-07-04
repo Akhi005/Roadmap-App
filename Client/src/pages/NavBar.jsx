@@ -28,7 +28,7 @@ export default function NavBar() {
     <nav className="bg-[#f5f0ff] px-4 py-4 shadow-md h-40">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center gap-4">
-          <button className="text-3xl lg:hidden" onClick={handleDropDown}>
+          <button className="text-3xl lg:hidden cursor-pointer" onClick={handleDropDown}>
             {isOpen ? <HiX /> : <HiMenu />}
           </button>
           <Link to="/roadmap" className="flex items-center gap-2 text-violet-700 font-semibold text-xl sm:text-2xl">
@@ -44,7 +44,7 @@ export default function NavBar() {
           <p className="text-sm sm:text-base">{auth?.username ?? username}</p>
           <button
             onClick={handleSignOut}
-            className="text-white bg-blue-800 rounded-xl px-4 py-2 text-sm sm:text-base"
+            className="text-white bg-blue-800 rounded-xl px-4 py-2 text-sm sm:text-base cursor-pointer"
           >
             Sign Out
           </button>
@@ -57,7 +57,7 @@ export default function NavBar() {
           <p className="text-sm">{auth?.username ?? username}</p>
           <button
             onClick={handleSignOut}
-            className="text-white bg-blue-800 rounded-xl px-4 py-2 text-sm"
+            className="text-white bg-blue-800 rounded-xl px-4 cursor-pointer py-2 text-sm"
           >
             Sign Out
           </button>
