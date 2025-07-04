@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Logo from '../components/common/Logo'
 import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../context/AuthContext'
-import { IoHome } from "react-icons/io5";
+import { IoHome } from "react-icons/io5"
 
 export default function NavBar() {
   const navigate = useNavigate()
@@ -22,9 +22,9 @@ export default function NavBar() {
     <>
       <nav className="flex w-full justify-around px-5 h-28 items-center text-xl bg-[#f5f0ff]">
         <Link to='/roadmap' className="flex items-center gap-2 text-violet-700 font-semibold text-2xl" onClick={handleDropDown}>
-          <IoHome/> Start Here
+          <IoHome /> Start Here
         </Link>
-        <Link to='/'><Logo width={220} /></Link>
+        <Logo width={220} />
         <div className="flex gap-2 items-center">
           <p className=" ">{auth?.username ?? username}</p>
           <button onClick={handleSignOut} className="text-white bg-blue-800  rounded-xl px-3 py-2 cursor-pointer">Sign Out</button>

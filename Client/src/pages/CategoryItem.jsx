@@ -131,7 +131,7 @@ export default function CategoryItem() {
                 This is where you can find more detailed content or tutorials
                 for: <strong>{selectedStep.title}</strong>.
               </p>
-                <p className="my-5"><StepDescription description={selectedStep.description}/></p>
+              <p className="my-5"><StepDescription description={selectedStep.description} /></p>
             </div>
           )}
           <UpvoteButton />

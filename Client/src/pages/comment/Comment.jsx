@@ -15,14 +15,14 @@ export default function Comment({
   const [isEditing, setIsEditing] = useState(false)
   const [isReplying, setIsReplying] = useState(false)
   const isAuthor = currentUserId === (comment.user?._id || comment.userId)
-  
+
   const handleEditSubmit = (content) => {
     onEdit(comment._id, content)
     setIsEditing(false)
   }
 
   const handleReplySubmit = (content) => {
-    onReply(content, comment._id)  
+    onReply(content, comment._id)
     setIsReplying(false)
   }
 
@@ -47,15 +47,15 @@ export default function Comment({
   }
 
   const formattedDate = new Date(comment.createdAt).toLocaleString()
-  
+
   return (
     <div className={`mt-4 mx-8 text-xl ${depth > 0 ? `ml-${depth * 3}` : ''}`}>
-       <div className="flex gap-1 items-center my-2">
-          <RxAvatar /><p className="text-lg font-semibold text-gray-700">
-            {comment.user?.username || "Anonymous User"}
-            <span className="text-sm text-gray-500 ml-2">{formattedDate}</span>
-          </p>
-       </div>
+      <div className="flex gap-1 items-center my-2">
+        <RxAvatar /><p className="text-lg font-semibold text-gray-700">
+          {comment.user?.username || "Anonymous User"}
+          <span className="text-sm text-gray-500 ml-2">{formattedDate}</span>
+        </p>
+      </div>
       <div className="border border-gray-200 p-2 ml-12 rounded-lg bg-gray-100 shadow-sm">
         {isEditing ? (
           <CommentForm

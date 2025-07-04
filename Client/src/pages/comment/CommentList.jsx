@@ -6,7 +6,7 @@ import { useAuth } from '../../context/AuthContext'
 
 function buildCommentTree(flatComments) {
   if (!Array.isArray(flatComments)) return []
-  const map = {}, roots = [];
+  const map = {}, roots = []
 
   flatComments.forEach(e => {
     e.replies = []

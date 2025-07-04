@@ -109,7 +109,7 @@ export default function CategoryList() {
                   {roadmap.title || roadmap.slug || "Untitled Roadmap"}
                 </Link>
                 <span className="flex items-center p-6 gap-1 text-gray-600 font-medium">
-                  <BiUpvote/> {roadmap.upvoteCount ?? 0}
+                  <BiUpvote /> {roadmap.upvoteCount ?? 0}
                 </span>
               </div>
 

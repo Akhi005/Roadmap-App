@@ -22,7 +22,7 @@ export default function SignUpForm() {
     setServerError("")
     try {
       const res = await signup(data.username, data.email, data.password)
-      if (res){
+      if (res) {
         navigate('/roadmap')
       }
     } catch (err) {
