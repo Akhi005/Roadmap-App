@@ -5,6 +5,7 @@ import { BiUpvote, BiSolidUpvote } from "react-icons/bi"
 import { useAuth } from "../context/AuthContext"
 import toast from "react-hot-toast"
 import CommentList from "./comment/CommentList"
+import StepDescription from "../components/MarkDownDescription"
 
 export default function CategoryItem() {
   const { roadmaps, upvoteRoadmap, updateStepStatus, checkUserUpvoteStatus } = useRoadmapContext()
@@ -120,7 +121,6 @@ export default function CategoryItem() {
                 ))}
               </div>
               <p className="mb-6">{categoryItem.description}</p>
-              <UpvoteButton />
             </>
           ) : (
             <div>
@@ -131,11 +131,10 @@ export default function CategoryItem() {
                 This is where you can find more detailed content or tutorials
                 for: <strong>{selectedStep.title}</strong>.
               </p>
-              <p className="my-5">{selectedStep.description}</p>
-              <UpvoteButton />
+                <p className="my-5"><StepDescription description={selectedStep.description}/></p>
             </div>
           )}
-
+          <UpvoteButton />
         </div>
       </div>
       <CommentList roadmapId={categoryItem._id} />

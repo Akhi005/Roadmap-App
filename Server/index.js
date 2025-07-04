@@ -109,7 +109,7 @@ connectDB().then(() => {
     const userId = req.userId
     if (!roadmapId || !ObjectId.isValid(roadmapId)) return res.status(400).json({ message: "Invalid roadmap ID" })
     try {
-      const existingUpvote = await upvotesCollection.findOne({ userId: new ObjectId(userId), roadmapId: new ObjectId(roadmapId) })
+      const existingUpvote = await upvotesCollection.findOne({ userId: new ObjectId(), roadmapId: new ObjectId() })
       res.status(200).json({ hasUpvoted: !!existingUpvote })
     } catch (err) {
       res.status(500).json({ message: "Failed to check upvote status", details: err.message })
@@ -155,8 +155,8 @@ connectDB().then(() => {
     const userId = req.userId
     if (!ObjectId.isValid(roadmapId)) return res.status(400).json({ message: "Invalid roadmap ID format" })
     try {
-      const roadmapObjectId = new ObjectId(roadmapId)
-      const userObjectId = new ObjectId(userId)
+      const roadmapObjectId = new ObjectId()
+      const userObjectId = new ObjectId()
       const existingUpvote = await upvotesCollection.findOne({ userId: userObjectId, roadmapId: roadmapObjectId })
       if (existingUpvote) return res.status(409).json({ success: false, message: "You have already upvoted this roadmap." })
       else {
@@ -181,9 +181,9 @@ connectDB().then(() => {
     if (!status || !allowedStatuses.includes(status)) return res.status(400).json({ message: "Invalid or missing status" })
     if (!ObjectId.isValid(roadmapId)) return res.status(400).json({ message: "Invalid roadmap ID format" })
     try {
-      const result = await roadmapCollection.updateOne({ _id: new ObjectId(roadmapId) }, { $set: { status } })
+      const result = await roadmapCollection.updateOne({ _id: new ObjectId() }, { $set: { status } })
       if (result.modifiedCount === 0) return res.status(404).json({ message: "Roadmap not found or status unchanged" })
-      const updatedRoadmap = await roadmapCollection.findOne({ _id: new ObjectId(roadmapId) })
+      const updatedRoadmap = await roadmapCollection.findOne({ _id: new ObjectId() })
       res.json({ success: true, message: "Roadmap status updated successfully", roadmap: updatedRoadmap })
     } catch (err) {
       res.status(500).json({ message: "Server error updating roadmap status", details: err.message })
@@ -200,28 +200,28 @@ connectDB().then(() => {
     if (parentId && !ObjectId.isValid(parentId)) return res.status(400).json({ message: "Invalid parent ID format" })
 
     const commentData = {
-      roadmapId: new ObjectId(roadmapId),
+      roadmapId: new ObjectId(),
       stepId: stepId || null,
-      userId: new ObjectId(req.userId),
+      userId: new ObjectId(),
       content: content.trim(),
-      parentId: parentId ? new ObjectId(parentId) : null,
+      parentId: parentId ? new ObjectId() : null,
       nestingLevel: parentId ? 1 : 0,
       createdAt: new Date(),
       updatedAt: new Date()
     }
     try {
       const result = await commentsCollection.insertOne(commentData)
-      const user = await usersCollection.findOne({ _id: new ObjectId(req.userId) }, { projection: { username: 1 } })
+      const user = await usersCollection.findOne({ _id: new ObjectId() }, { projection: { username: 1 } })
       const responseComment = {
-        ...commentData, 
-        _id: result.insertedId.toString(), 
-        userId: req.userId, 
+        ...commentData,
+        _id: result.insertedId.toString(),
+        userId: req.userId,
         user: user ? { _id: user._id.toString(), username: user.username } : null
       }
       res.status(201).json({
         success: true,
         message: "Comment added successfully",
-        comment: responseComment 
+        comment: responseComment
       })
     } catch (err) {
       res.status(500).json({ message: "Failed to post comment", details: err.message })
@@ -235,26 +235,26 @@ connectDB().then(() => {
     try {
       const comments = await commentsCollection.aggregate([
         {
-          $match: { roadmapId: new ObjectId(roadmapId) }
-        },{
+          $match: { roadmapId: new ObjectId() }
+        }, {
           $lookup: {
-            from: "users",         
-            localField: "userId",   
-            foreignField: "_id",   
-            as: "authorInfo"        
+            from: "users",
+            localField: "userId",
+            foreignField: "_id",
+            as: "authorInfo"
           }
-        },{
+        }, {
           $unwind: {
             path: "$authorInfo",
-            preserveNullAndEmptyArrays: true 
+            preserveNullAndEmptyArrays: true
           }
-        },{
+        }, {
           $project: {
             _id: { "$toString": "$_id" },
             roadmapId: { "$toString": "$roadmapId" },
             stepId: 1,
             content: 1,
-            userId: { "$toString": "$userId" }, 
+            userId: { "$toString": "$userId" },
             parentId: {
               $cond: { if: "$parentId", then: { "$toString": "$parentId" }, else: null }
             },
@@ -265,12 +265,14 @@ connectDB().then(() => {
               $cond: {
                 if: "$authorInfo._id",
                 then: {
-                  _id: { "$toString": "$authorInfo._id" }, 
-                  username: "$authorInfo.username"         
+                  _id: { "$toString": "$authorInfo._id" },
+                  username: "$authorInfo.username"
                 },
-                else: null 
+                else: null
               }
-            }}},
+            }
+          }
+        },
         {
           $sort: { createdAt: 1 }
         }
@@ -286,25 +288,25 @@ connectDB().then(() => {
     if (!content || content.length > 300) return res.status(400).json({ message: "Invalid content" })
     try {
       const result = await commentsCollection.updateOne(
-        { _id: new ObjectId(req.params.id), userId: new ObjectId(req.userId) },
+        { _id: new ObjectId(), userId: new ObjectId() },
         { $set: { content: content.trim(), updatedAt: new Date() } }
       )
       if (result.modifiedCount === 0) return res.status(403).json({ message: "Unauthorized or no change" })
-      res.json({ success: true, message: "Comment updated successfully" }) 
+      res.json({ success: true, message: "Comment updated successfully" })
     } catch (err) {
-      res.status(500).json({ message: "Error updating comment", details: err.message }) 
+      res.status(500).json({ message: "Error updating comment", details: err.message })
     }
   })
   app.delete('/comments/:id', verifyToken, async (req, res) => {
     try {
       const result = await commentsCollection.deleteOne({
-        _id: new ObjectId(req.params.id),
-        userId: new ObjectId(req.userId)
+        _id: new ObjectId(),
+        userId: new ObjectId()
       })
       if (result.deletedCount === 0) return res.status(403).json({ message: "Unauthorized or not found" })
-      res.json({ success: true, message: "Comment deleted successfully" }) 
+      res.json({ success: true, message: "Comment deleted successfully" })
     } catch (err) {
-      res.status(500).json({ message: "Error deleting comment", details: err.message }) 
+      res.status(500).json({ message: "Error deleting comment", details: err.message })
     }
   })
   app.get('/', (req, res) => {

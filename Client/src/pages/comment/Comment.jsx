@@ -1,6 +1,7 @@
 import { useState } from "react"
 import CommentForm from "./CommentForm"
 import { RxAvatar } from "react-icons/rx"
+import toast from "react-hot-toast"
 
 export default function Comment({
   comment,
@@ -32,6 +33,10 @@ export default function Comment({
   }
 
   const toggleReply = () => {
+    if (depth >= 3) {
+      toast.error("A comment can have a maximum of 3 replies.")
+      return
+    }
     setIsReplying(prev => !prev)
     if (isEditing) setIsEditing(false)
   }
@@ -79,14 +84,13 @@ export default function Comment({
         </div>
       </div>
 
-      {isReplying && depth < 2 && (
+      {isReplying && depth < 3 && (
         <CommentForm
           onSubmit={handleReplySubmit}
           onCancel={() => setIsReplying(false)}
           submitLabel="Reply"
         />
       )}
-
       {replies.length > 0 && replies.map((reply) => (
         <Comment
           key={reply._id}

@@ -1,6 +1,7 @@
 import React from "react"
 import { useRoadmapContext } from "../context/RoadmapContext"
 import { Link } from "react-router-dom"
+import { BiUpvote } from "react-icons/bi"
 
 export default function CategoryList() {
   const {
@@ -36,7 +37,6 @@ export default function CategoryList() {
     <div className="container mx-auto px-4 py-8 font-inter">
       <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-12">Developer Roadmaps</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 bg-white p-6 rounded-xl shadow-md">
-
         <div className="flex flex-col">
           <label htmlFor="status-filter" className="text-sm font-semibold mb-1 text-gray-600">Status</label>
           <select
@@ -109,7 +109,7 @@ export default function CategoryList() {
                   {roadmap.title || roadmap.slug || "Untitled Roadmap"}
                 </Link>
                 <span className="flex items-center p-6 gap-1 text-gray-600 font-medium">
-                  🔼 {roadmap.upvoteCount ?? 0}
+                  <BiUpvote/> {roadmap.upvoteCount ?? 0}
                 </span>
               </div>
 
