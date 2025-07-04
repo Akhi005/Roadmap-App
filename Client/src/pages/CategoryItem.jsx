@@ -74,7 +74,7 @@ export default function CategoryItem() {
   }
 
   return (
-    <div className="p-4 text-xl">
+    <div className="p-4 text-xl ">
       <h2 className="text-4xl text-center py-5 font-bold mb-2">
         {categoryItem.title}
       </h2>
@@ -92,7 +92,7 @@ export default function CategoryItem() {
         </select>
 
       </div>
-      <div className="flex w-full h-full justify-center items-start gap-24 px-12 mb-24">
+      <div className="flex flex-col lg:flex-row w-full h-full justify-center items-start gap-24 px-12 mb-24">
         <div>
           <h3 className="text-xl font-semibold mb-3">Steps:</h3>
           <ul className="list-disc list-inside space-y-5 border-2 p-8 rounded-xl w-84 border-violet-300">
@@ -110,7 +110,7 @@ export default function CategoryItem() {
         <div className="border-2 p-12 rounded-xl mt-10 border-violet-300 w-full h-full">
           {!selectedStep ? (
             <>
-              <div className="flex gap-4 mb-12">
+              <div className="flex flex-wrap gap-4 mb-12">
                 {categoryItem.tags.map((e, index) => (
                   <p
                     key={index}

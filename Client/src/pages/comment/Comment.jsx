@@ -49,14 +49,19 @@ export default function Comment({
   const formattedDate = new Date(comment.createdAt).toLocaleString()
 
   return (
-    <div className={`mt-4 mx-8 text-xl ${depth > 0 ? `ml-${depth * 3}` : ''}`}>
-      <div className="flex gap-1 items-center my-2">
-        <RxAvatar /><p className="text-lg font-semibold text-gray-700">
+    <div
+      className={`mt-4 px-2 sm:px-6 text-base sm:text-lg ${depth > 0 ? `pl-${Math.min(depth * 4, 12)}` : ''
+        }`}
+    >
+      <div className="flex gap-2 items-center mb-2">
+        <RxAvatar className="text-2xl" />
+        <p className="text-sm sm:text-base font-semibold text-gray-700 break-words">
           {comment.user?.username || "Anonymous User"}
-          <span className="text-sm text-gray-500 ml-2">{formattedDate}</span>
+          <span className="block sm:inline text-xs sm:text-sm text-gray-500 ml-0 sm:ml-2">{formattedDate}</span>
         </p>
       </div>
-      <div className="border border-gray-200 p-2 ml-12 rounded-lg bg-gray-100 shadow-sm">
+
+      <div className="border border-gray-200 rounded-lg bg-gray-100 shadow-sm p-3 sm:ml-12">
         {isEditing ? (
           <CommentForm
             initialContent={comment.content}
@@ -65,32 +70,49 @@ export default function Comment({
             submitLabel="Update Comment"
           />
         ) : (
-          <p className="mt-1 text-gray-800">{comment.content}</p>
+          <p className="mt-1 text-gray-800 break-words">{comment.content}</p>
         )}
 
-        <div className="text-sm font-bold mt-2 flex gap-6 text-blue-600">
-          <button className="cursor-pointer" onClick={toggleReply} aria-label={isReplying ? "Cancel Reply" : "Reply to comment"}>
+        <div className="text-sm font-bold mt-2 flex gap-6 text-blue-600 flex-wrap">
+          <button
+            className="cursor-pointer"
+            onClick={toggleReply}
+            aria-label={isReplying ? "Cancel Reply" : "Reply to comment"}
+          >
             {isReplying ? "Cancel" : "Reply"}
           </button>
 
           {isAuthor && (
             <>
-              <button className="cursor-pointer" onClick={toggleEdit} aria-label={isEditing ? "Cancel Edit" : "Edit comment"}>
+              <button
+                className="cursor-pointer"
+                onClick={toggleEdit}
+                aria-label={isEditing ? "Cancel Edit" : "Edit comment"}
+              >
                 {isEditing ? "Cancel" : "Edit"}
               </button>
-              <button className="cursor-pointer" onClick={handleDeleteClick} aria-label="Delete comment">Delete</button>
+              <button
+                className="cursor-pointer"
+                onClick={handleDeleteClick}
+                aria-label="Delete comment"
+              >
+                Delete
+              </button>
             </>
           )}
         </div>
       </div>
 
       {isReplying && depth < 3 && (
-        <CommentForm
-          onSubmit={handleReplySubmit}
-          onCancel={() => setIsReplying(false)}
-          submitLabel="Reply"
-        />
+        <div className="mt-2 sm:ml-12">
+          <CommentForm
+            onSubmit={handleReplySubmit}
+            onCancel={() => setIsReplying(false)}
+            submitLabel="Reply"
+          />
+        </div>
       )}
+
       {replies.length > 0 && replies.map((reply) => (
         <Comment
           key={reply._id}
